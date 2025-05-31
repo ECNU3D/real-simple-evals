@@ -1,0 +1,28 @@
+{
+  "finqa": {
+    "name": "finqa",
+    "class_name": "FinqaEval",
+    "file_path": "generated_evals\\finqa_eval.py",
+    "description": "Automatically generated evaluation for dreamerdeo/finqa",
+    "task_type": "auto_generated",
+    "dataset_name": "dreamerdeo/finqa",
+    "requires_grader": false,
+    "requires_equality_checker": false,
+    "default_num_examples": null,
+    "supports_checkpointing": true,
+    "created_by": "agentic_eval_builder"
+  },
+  "rag_mini_wikipedia": {
+    "name": "rag_mini_wikipedia",
+    "class_name": "Rag_Mini_WikipediaEval",
+    "file_path": "generated_evals\\rag_mini_wikipedia_eval.py",
+    "description": "Automatically generated evaluation for rag-datasets/rag-mini-wikipedia (config: question-answer)",
+    "task_type": "factual_qa",
+    "dataset_name": "rag-datasets/rag-mini-wikipedia",
+    "requires_grader": false,
+    "requires_equality_checker": false,
+    "default_num_examples": null,
+    "supports_checkpointing": true,
+    "created_by": "agentic_eval_builder"
+  }
+}
