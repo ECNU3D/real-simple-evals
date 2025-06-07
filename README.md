@@ -4,6 +4,23 @@ We are open sourcing it so we can be transparent about the accuracy numbers we'r
 
 **Note:** This is a fork of the original [OpenAI simple-evals](https://github.com/openai/simple-evals) repository with several enhancements and additions.
 
+## Environment Setup
+
+This project uses environment variables for configuration. Create a `.env` file in the root directory with the following variables:
+
+```bash
+# Google Cloud Project ID for Vertex AI models
+GOOGLE_CLOUD_PROJECT_ID=your-project-id
+```
+
+You can copy the `.env.example` file as a template:
+
+```bash
+cp .env.example .env
+```
+
+Then edit the `.env` file with your actual values.
+
 ## Fork Changes
 
 This fork extends the original simple-evals repository with the following key improvements:

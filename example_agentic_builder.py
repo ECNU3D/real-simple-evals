@@ -6,12 +6,17 @@ from HuggingFace datasets using language models as agents.
 """
 
 import os
+from dotenv import load_dotenv
 from agentic_eval_builder import AgenticEvalBuilder, interactive_eval_builder
 from sampler.chat_completion_sampler import ChatCompletionSampler
 from sampler.gemini_sampler import GeminiSampler
 
 def setup_samplers():
     """Set up the language model samplers for the different agents"""
+    
+    # Load environment variables
+    load_dotenv()
+    project_id = os.environ.get("GOOGLE_CLOUD_PROJECT_ID", "your-project-id")
     
     # Check for API keys
     if not os.getenv("OPENAI_API_KEY"):
@@ -22,7 +27,7 @@ def setup_samplers():
     # In practice, you might want to use different models for different tasks
     base_sampler = GeminiSampler(
         model="gemini-2.5-flash-preview-05-20",
-        project_id="your-project-id",
+        project_id=project_id,
         location="us-central1",
         use_gemini_grounding=False,
     )
@@ -35,7 +40,7 @@ def setup_samplers():
     analyzer_sampler = ChatCompletionSampler(
         model="meta/llama-4-maverick-17b-128e-instruct-maas",
         system_message="You are an expert in dataset analysis. Analyze datasets systematically and provide structured JSON responses.",
-        base_url="https://us-east5-aiplatform.googleapis.com/v1/projects/{your-project-id}/locations/us-east5/endpoints/openapi"
+        base_url=f"https://us-east5-aiplatform.googleapis.com/v1/projects/{project_id}/locations/us-east5/endpoints/openapi"
     )
     
     # detector_sampler = ChatCompletionSampler(
@@ -45,7 +50,7 @@ def setup_samplers():
     detector_sampler = ChatCompletionSampler(
         model="meta/llama-4-maverick-17b-128e-instruct-maas",
         system_message="You are an expert in machine learning evaluation methodologies.",
-        base_url="https://us-east5-aiplatform.googleapis.com/v1/projects/{your-project-id}/locations/us-east5/endpoints/openapi"
+        base_url=f"https://us-east5-aiplatform.googleapis.com/v1/projects/{project_id}/locations/us-east5/endpoints/openapi"
     )  
     
     # prompt_engineer = ChatCompletionSampler(
@@ -56,7 +61,7 @@ def setup_samplers():
     prompt_engineer = ChatCompletionSampler(
         model="meta/llama-4-maverick-17b-128e-instruct-maas",
         system_message="You are an expert prompt engineer. Create clear, effective prompts for language model evaluation.",
-        base_url="https://us-east5-aiplatform.googleapis.com/v1/projects/{your-project-id}/locations/us-east5/endpoints/openapi"
+        base_url=f"https://us-east5-aiplatform.googleapis.com/v1/projects/{project_id}/locations/us-east5/endpoints/openapi"
     )
     
     # scoring_sampler = ChatCompletionSampler(
@@ -67,7 +72,7 @@ def setup_samplers():
     scoring_sampler = ChatCompletionSampler(
         model="meta/llama-4-maverick-17b-128e-instruct-maas",
         system_message="You are an expert in evaluation metrics and scoring methods.",
-        base_url="https://us-east5-aiplatform.googleapis.com/v1/projects/{your-project-id}/locations/us-east5/endpoints/openapi"
+        base_url=f"https://us-east5-aiplatform.googleapis.com/v1/projects/{project_id}/locations/us-east5/endpoints/openapi"
     )
     
     # code_generator = ChatCompletionSampler(
@@ -78,14 +83,14 @@ def setup_samplers():
     code_generator = ChatCompletionSampler(
         model="meta/llama-4-maverick-17b-128e-instruct-maas",
         system_message="You are an expert Python programmer specialized in evaluation frameworks. Generate clean, well-documented code.",
-        base_url="https://us-east5-aiplatform.googleapis.com/v1/projects/{your-project-id}/locations/us-east5/endpoints/openapi"
+        base_url=f"https://us-east5-aiplatform.googleapis.com/v1/projects/{project_id}/locations/us-east5/endpoints/openapi"
     )
     
     # Add mapping sampler for column mapping agent
     mapping_sampler = ChatCompletionSampler(
         model="meta/llama-4-maverick-17b-128e-instruct-maas",
         system_message="You are an expert in data analysis and semantic understanding. Analyze dataset structures and intelligently map columns to template requirements.",
-        base_url="https://us-east5-aiplatform.googleapis.com/v1/projects/{your-project-id}/locations/us-east5/endpoints/openapi"
+        base_url=f"https://us-east5-aiplatform.googleapis.com/v1/projects/{project_id}/locations/us-east5/endpoints/openapi"
     )
     
     return analyzer_sampler, detector_sampler, prompt_engineer, scoring_sampler, code_generator, mapping_sampler

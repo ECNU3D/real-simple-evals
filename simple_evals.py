@@ -2,6 +2,7 @@ import json
 import argparse
 import pandas as pd
 import os
+from dotenv import load_dotenv
 import common
 from browsecomp_eval import BrowseCompEval
 from drop_eval import DropEval
@@ -75,6 +76,9 @@ def main():
     )
 
     args = parser.parse_args()
+
+    load_dotenv()
+    project_id = os.environ.get("GOOGLE_CLOUD_PROJECT_ID", "your-project-id")
 
     models = {
         # Reasoning Models
@@ -185,29 +189,29 @@ def main():
         "llama-4-maverick-17b-128e-instruct-maas": ChatCompletionSampler(
             model="meta/llama-4-maverick-17b-128e-instruct-maas",
             system_message=OPENAI_SYSTEM_MESSAGE_API,
-            base_url=f"https://us-east5-aiplatform.googleapis.com/v1/projects/{your_project_id}/locations/us-east5/endpoints/openapi"
+            base_url=f"https://us-east5-aiplatform.googleapis.com/v1/projects/{project_id}/locations/us-east5/endpoints/openapi"
         ),
         "gemini-2.5-pro-preview-05-06": GeminiSampler(
             model="gemini-2.5-pro-preview-05-06",
-            project_id="{your-project-id}",
+            project_id=project_id,
             location="us-central1",
             use_gemini_grounding=args.use_gemini_grounding,
         ),
         "gemini-2.0-flash-001": GeminiSampler(
             model="gemini-2.0-flash-001",
-            project_id="{your-project-id}",
+            project_id=project_id,
             location="us-central1",
             use_gemini_grounding=args.use_gemini_grounding,
         ),
         "gemini-2.5-flash-preview-05-20": GeminiSampler(
             model="gemini-2.5-flash-preview-05-20",
-            project_id="{your-project-id}",
+            project_id=project_id,
             location="us-central1",
             use_gemini_grounding=args.use_gemini_grounding,
         ),
         # "claude-3-7-sonnet": ClaudeVertexCompletionSampler(
         #     model="claude-3-7-sonnet@20250219",
-        #     project_id="{your-project-id}",
+        #     project_id=project_id,
         #     location="us-east5",
         # ),
     }

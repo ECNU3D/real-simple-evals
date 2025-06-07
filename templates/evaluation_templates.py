@@ -228,10 +228,14 @@ def get_drop_template() -> str:
     return '''import random
 from datasets import load_dataset
 from typing import Optional
+from dotenv import load_dotenv
 
 import common
 from eval_types import Eval, EvalResult, SamplerBase, SingleEvalResult
 from eval_utils import extract_answer_after_keyword, ScoringStrategy, EvaluationMixin
+
+load_dotenv()
+project_id = os.environ.get("GOOGLE_CLOUD_PROJECT_ID", "your-project-id")
 
 class {class_name}(Eval, EvaluationMixin):
     def __init__(self, dataset_name: str = "{dataset_name}",
@@ -286,7 +290,7 @@ class {class_name}(Eval, EvaluationMixin):
                     from sampler.chat_completion_sampler import ChatCompletionSampler
                     equality_checker = ChatCompletionSampler(
                         model="meta/llama-4-maverick-17b-128e-instruct-maas",
-                        base_url="https://us-east5-aiplatform.googleapis.com/v1/projects/{your-project-id}/locations/us-east5/endpoints/openapi"
+                        base_url=f"https://us-east5-aiplatform.googleapis.com/v1/projects/{project_id}/locations/us-east5/endpoints/openapi"
                     )
                     scorer = ScoringStrategy.get_scorer("math_equivalence", equality_checker=equality_checker)
                 except:

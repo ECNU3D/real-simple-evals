@@ -34,7 +34,7 @@ class ClaudeVertexCompletionSampler(SamplerBase):
         temperature: float = 0.0,  # default in Anthropic example
         max_tokens: int = 1024,
         location: str = "us-east5",
-        project_id: str = "{your-project-id}",
+        project_id: str = "your-project-id",
     ):
         self.api_key_name = "ANTHROPIC_API_KEY"
         self.client = AnthropicVertex(region=location, project_id=project_id)
