@@ -1,3 +1,22 @@
+```
+  ___                   _   _                           
+ / _ \                 | | (_)                          
+/ /_\ \ __ _  ___ _ __ | |_ _  ___                      
+|  _  |/ _` |/ _ \ '_ \| __| |/ __|                     
+| | | | (_| |  __/ | | | |_| | (__                      
+\_| |_/\__, |\___|_| |_|\__|_|\___|                     
+        __/ |                                           
+       |___/                                            
+ _____ _                 _        _____           _     
+/  ___(_)               | |      |  ___|         | |    
+\ `--. _ _ __ ___  _ __ | | ___  | |____   ____ _| |___ 
+ `--. \ | '_ ` _ \| '_ \| |/ _ \ |  __\ \ / / _` | / __|
+/\__/ / | | | | | | |_) | |  __/ | |___\ V / (_| | \__ \
+\____/|_|_| |_| |_| .__/|_|\___| \____/ \_/ \__,_|_|___/
+                  | |                                   
+                  |_|                                   
+```
+
 # Overview
 This repository contains a lightweight library for evaluating language models.
 We are open sourcing it so we can be transparent about the accuracy numbers we're publishing alongside our latest models.
